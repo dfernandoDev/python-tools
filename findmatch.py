@@ -15,6 +15,9 @@ with open('matched.csv', 'w') as f:
 		url = "https://app.datadoghq.com/monitors/" + str(m["id"])
 
 		# extract the text within the 'exclude' parentheses
-		match=re.findall(r"\.exclude\((.*?\)).",query)
+		# match=re.findall(r"\.exclude\((.*?\)).",query)
+		# extract the text within the 'exclude' parentheses and
+		# all of the excluded tags
+		match=re.findall(r"(\.exclude\((.*?)\).|excluded_(tags:.[^\s]+))", query)
 		if match:
 			f.write(name + str(",") + url + "," + creator + ",\"" + str(match).replace("\"","\"\"") + str("\"\n"))
