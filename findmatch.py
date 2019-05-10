@@ -10,10 +10,11 @@ with open('monitors.json', 'r') as fp:
 with open('matched.csv', 'w') as f:
 	for m in jsondata:
 		name = m["name"]
+		creator=m["creator"]["name"]
 		query = m["query"]
 		url = "https://app.datadoghq.com/monitors/" + str(m["id"])
 
 		# extract the text within the 'exclude' parentheses
 		match=re.findall(r"\.exclude\((.*?\)).",query)
 		if match:
-			f.write(name + str(",") + url + ",\"" + str(match).replace("\"","\"\"") + str("\"\n"))
+			f.write(name + str(",") + url + ",\"" + creator + ",\"" + str(match).replace("\"","\"\"") + str("\"\n"))
