@@ -17,4 +17,4 @@ with open('matched.csv', 'w') as f:
 		# extract the text within the 'exclude' parentheses
 		match=re.findall(r"\.exclude\((.*?\)).",query)
 		if match:
-			f.write(name + str(",") + url + ",\"" + creator + ",\"" + str(match).replace("\"","\"\"") + str("\"\n"))
+			f.write(name + str(",") + url + "," + creator + ",\"" + str(match).replace("\"","\"\"") + str("\"\n"))
