@@ -15,8 +15,8 @@ default['data_dir']='/data/redis'
 default['pid_dir']='/run/redis'
 default['config_dir']='/usr/local/sifi/etc/redis'
 default['bgsave_policy']='cstore'
-default['appendonly']='false'
-default['no_appendfsync_on_rewrite']='false'
+default['appendonly']=False
+default['no_appendfsync_on_rewrite']=False
 mydata['defaults']=default
 
 port=STARTING_PORT
@@ -25,7 +25,7 @@ for s in range(SERVER_NAME_START,SERVER_NAME_END+1):
     for r in range(RADIS_PER_SERVER):
         shard={}
         shard['host']='dc6redis{}'.format(s)
-        shard['port']=str(port)
+        shard['port']=port
         instance_name='cstore_shard_{}'.format(instance)
         mydata[instance_name]=shard
         instance=instance+1
