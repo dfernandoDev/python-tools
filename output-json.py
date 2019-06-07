@@ -10,7 +10,7 @@ mydata={}
 mydata['id']='cstore_east'
 
 default={}
-default['memory']='{}gb'.format(INSTANCE_MEMORY)
+default['maxmemory']='{}gb'.format(INSTANCE_MEMORY)
 default['data_dir']='/data/redis'
 default['pid_dir']='/run/redis'
 default['config_dir']='/usr/local/sifi/etc/redis'
