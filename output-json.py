@@ -19,9 +19,12 @@ default['appendonly']=False
 default['no_appendfsync_on_rewrite']=False
 mydata['defaults']=default
 
-port=STARTING_PORT
+# uncomment if port number continues
+# port=STARTING_PORT
 instance=0
 for s in range(SERVER_NAME_START,SERVER_NAME_END+1):
+    # uncomment if port number restart for each server
+    port=STARTING_PORT
     for r in range(RADIS_PER_SERVER):
         shard={}
         shard['host']='dc6redis{}'.format(s)
