@@ -1,4 +1,4 @@
 # python
 
 Run:
-python [file-name.py]
+python3 [file-name.py]

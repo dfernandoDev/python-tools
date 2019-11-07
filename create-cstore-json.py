@@ -1,9 +1,7 @@
 # use python3 to maintain map insert order
 # to run python3 create-cstore-json.py
 
-
 import json
-import pprint
 
 # store details
 CSTORE_LOCATION='cstore_east'
@@ -50,6 +48,4 @@ for s in range(SERVER_NAME_START,SERVER_NAME_END+1):
         port_num=port_num+1
 
 with open(CSTORE_LOCATION + '_temp.json', 'w') as json_file:
-    #json.dump(mydata,json_file, indent=2, sort_keys=True)
     json.dump(mydata,json_file, indent=2)
-    #json.dump(mydata,json_file)
