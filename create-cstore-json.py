@@ -1,24 +1,24 @@
 # use python3 to maintain map insert order
-# to run python3 create-cstore-json.py
+# to run 'python3 create-cstore-json.py'
 
 import json
 
 # store details
-CSTORE_LOCATION='cstore_east'
+CSTORE_LOCATION='cstore_west'
 INSTANCE_NAME='cstore_shard_{}'
 
 # server details
-SERVER_NAME='dc6redis{}'
-SERVER_NAME_START=13
-SERVER_NAME_END=24
+SERVER_NAME='sj4redis{}'
+SERVER_NAME_START=5
+SERVER_NAME_END=10
 
 # redis details
-RADIS_PER_SERVER=40
+RADIS_PER_SERVER=30
 STARTING_PORT=16000
 INSTANCE_MEMORY=12
 
-mydata={}
-mydata['id']=CSTORE_LOCATION
+cstore_data={}
+cstore_data['id']=CSTORE_LOCATION
 
 default={}
 default['maxmemory']='{}gb'.format(INSTANCE_MEMORY)
@@ -29,7 +29,7 @@ default['bgsave_policy']='cstore'
 default['appendonly']=False
 default['no_appendfsync_on_rewrite']=False
 
-mydata['defaults']=default
+cstore_data['defaults']=default
 
 
 # uncomment if port number continues
@@ -43,9 +43,9 @@ for s in range(SERVER_NAME_START,SERVER_NAME_END+1):
         shard['host']=SERVER_NAME.format(s)
         shard['port']=port_num
         instance_id=INSTANCE_NAME.format(instance_counter)
-        mydata[instance_id]=shard
+        cstore_data[instance_id]=shard
         instance_counter=instance_counter+1
         port_num=port_num+1
 
 with open(CSTORE_LOCATION + '_temp.json', 'w') as json_file:
-    json.dump(mydata,json_file, indent=2)
+    json.dump(cstore_data,json_file, indent=2)
