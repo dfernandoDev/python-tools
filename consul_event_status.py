@@ -30,8 +30,8 @@ def PrintResults(nodelist, sectionlabel):
       print ("\n---- {label} [{count} Nodes] ----".format(label = sectionlabel, count = len(nodelist)))
 
     for event in nodelist:
-      print (event['Node'])
-      if c > maxnodestoshow:
+      print ("{0} {1}".format(event['ID'], event['Node']))
+      if c >= maxnodestoshow:
         break
       c = c + 1
 
