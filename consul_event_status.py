@@ -9,11 +9,12 @@ import requests
 import time
 import sys
 
-datacenter = "us-west1"
+datacenter = "us-central1"
 token = ""
 pollingduration = 10
 maxnodestoshow = 10
 
+cmd = "consul event -http-addr=consul.service.{ds}.consul:8500 -name \"run-chef\""
 url = "http://consul.service.{ds}.consul:8500/v1/catalog/service/consul-event-chef"
 
 def GetEvents():
@@ -65,15 +66,21 @@ errornodes=[]
 successnodes=[]
 inprogressnodes=[]
 
-while 1:
-  EventUpdates()
-  if len(inprogressnodes) == 0 or count == pollingduration:
-    break
-  print ("----- waiting ... {0} seconds-----\n".format(count))
-  # sleep for 1 sec
-  time.sleep(1)
-  # clean lists
-  count = count + 1
-  errornodes.clear()
-  successnodes.clear()
-  inprogressnodes.clear()
+try:
+  while 1:
+    EventUpdates()
+    # if len(inprogressnodes) == 0 or count == pollingduration:
+    if len(inprogressnodes) == 0:
+      break
+    print ("----- waiting ... {0} seconds-----\n".format(count))
+    # sleep for 1 sec
+    time.sleep(1)
+    # clean lists
+    count = count + 1
+    errornodes.clear()
+    successnodes.clear()
+    inprogressnodes.clear()
+except KeyboardInterrupt:
+    pass
+
+print(cmd.format(ds = datacenter))
